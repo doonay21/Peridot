@@ -37,13 +37,10 @@ As I mentioned before both of examples above will work using **Peridot Interpret
 
 OK we need to dive in to the basics. In our data array we start with pointer pointing cell nr 0 (the very first one), let's play with our cell.
 ______________________________
-**Changing value of the cell**
-* Increase cell value
+**List of commands**
 
-> +
+**>** | 
 
-Plus letter is **increasing cell's** value by **1**. When we will increase cell with value of 255 (maximum) it will round back to 0.
+**+** | Plus letter is **increasing cell's** value by **1**. When we will increase cell with value of 255 (maximum) it will round back to 0.
 
-> /
-
-Slash letter is **increasing cell's** value by **10**. If the value will exceed **255**, the result of addition will be **value - 256**.
+**/** | Slash letter is **increasing cell's** value by **10**. If the value will exceed **255**, the result of addition will be **value - 256**.
