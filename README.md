@@ -36,4 +36,14 @@ I must admit it looks a bit more complicated comparing to Brainfuck, but yeah, w
 As I mentioned before both of examples above will work using **Peridot Interpreter** as Peridot is fully complatible with Brainfuck.
 
 OK we need to dive in to the basics. In our data array we start with pointer pointing cell nr 0 (the very first one), let's play with our cell.
+______________________________
+**Changing value of the cell**
+* Increase cell value
 
+> +
+
+Plus letter is **increasing cell's** value by **1**. When we will increase cell with value of 255 (maximum) it will round back to 0.
+
+> /
+
+Slash letter is **increasing cell's** value by **10**. If after the
