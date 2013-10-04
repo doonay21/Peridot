@@ -1,4 +1,4 @@
 Peridot
 =======
 
-Partially based on Brainfuck esoteric programming language
+Peridot is esoteric programming language based on Brainfuck and fully compatible with it.
