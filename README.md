@@ -20,3 +20,20 @@ Peridot Language - Documentation
 
 Peridot language uses very simple model - you have access to one data array of 65536 byte cells initialized to zero. There is also movable data pointer initialized to the leftmost byte of the array.
 Apart from data array there is one more array called **Function Array** consists of 1024 byte cells initialized to zero, and its own movable pointer also initialized to the leftmost byte of the array.
+
+Lets start coding!
+
+**Peridot "Hello World!" example**
+
+> ///////++.V///-./V---..i.z///++.I>i/+++++.<.V+++.i---.\++.z///+++.
+
+I must admit it looks a bit more complicated comparing to Brainfuck, but yeah, we have less to write, and we do not use any loop!
+
+**Pure Brainfuck "Hello World!" example**
+
+> ++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.
+
+As I mentioned before both of examples above will work using **Peridot Interpreter** as Peridot is fully complatible with Brainfuck.
+
+OK we need to dive in to the basics. In our data array we start with pointer pointing cell nr 0 (the very first one), let's play with our cell.
+
