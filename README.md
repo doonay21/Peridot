@@ -19,4 +19,4 @@ Peridot Language - Documentation
 --------------------------------
 
 Peridot language uses very simple model - you have access to one data array of 65536 byte cells initialized to zero. There is also movable data pointer initialized to the leftmost byte of the array.
-Apart from data array there is one more array called **Function Array** consistis of 1024 byte cells initialized to zero, and its own movable pointer also initialized to the leftmost byte of the array.
+Apart from data array there is one more array called **Function Array** consists of 1024 byte cells initialized to zero, and its own movable pointer also initialized to the leftmost byte of the array.
