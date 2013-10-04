@@ -12,7 +12,7 @@
 *.la
 *.a
 
-/Compilator - Source code/Debug
-/Compilator - Source code/Peridot/Debug
-/Compilator - Source code/Peridot/ReadMe.txt
-/Compilator - Source code/ipch
+/Interpreter - Source code/Debug
+/Interpreter - Source code/Peridot/Debug
+/Interpreter - Source code/Peridot/ReadMe.txt
+/Interpreter - Source code/ipch
