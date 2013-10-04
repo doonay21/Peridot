@@ -11,3 +11,8 @@
 *.lai
 *.la
 *.a
+
+/Compilator - Source code/Debug
+/Compilator - Source code/Peridot/Debug
+/Compilator - Source code/Peridot/ReadMe.txt
+/Compilator - Source code/ipch
