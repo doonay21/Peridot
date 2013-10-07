@@ -4,7 +4,7 @@ Peridot
 The Peridot programing language is an esoteric programming language based on [Brainfuck](http://en.wikipedia.org/wiki/Brainfuck) and fully compatible with it.
 It was designed to extend the functionality of Brainfuck.
 
-Uploaded interpreter (0.1a version) is covering 100% of Peridot commands, and just a few built-in system functions. The interpreter is written for WIN32 only. I am having problems compiling it under Linux (I used some of C++11/C++0x goodies). I will add Linux version as soon as possible.
+Uploaded interpreter (0.1a version) is covering 100% of Peridot commands. The Live Interpreter is written for WIN32 and Linux.
 
 Peridot Interpreter - Usage
 ---------------------------
