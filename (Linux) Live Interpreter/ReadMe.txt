@@ -1,5 +1,5 @@
 Peridot Live Interpreter 0.1v
-by Dunajski Rafa³
+by Dunajski Rafal
 https://github.com/doonay21/Peridot
 
 
