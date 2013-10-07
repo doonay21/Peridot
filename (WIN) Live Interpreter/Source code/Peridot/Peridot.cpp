@@ -33,10 +33,10 @@ int main(int argc, char *argv[])
 	map<int, int> if_equal_jump_table;
 	stack<int> if_not_equal_loop_stack;
 	map<int, int> if_not_equal_jump_table;
-	stack<int> if_higher_loop_stack;
-	map<int, int> if_higher_jump_table;
-	stack<int> if_lower_loop_stack;
-	map<int, int> if_lower_jump_table;
+	stack<int> if_greater_loop_stack;
+	map<int, int> if_greater_jump_table;
+	stack<int> if_less_loop_stack;
+	map<int, int> if_less_jump_table;
 
 	stack<int> pos_stack;
 	stack<unsigned char> val_stack;
@@ -136,38 +136,38 @@ int main(int argc, char *argv[])
 					if_not_equal_jump_table.insert(pair<int, int> (openPos, i + 1));
                 }
                 break;
-			case 'H':
-                if_higher_loop_stack.push(i);
+			case 'G':
+                if_greater_loop_stack.push(i);
                 break;
-			case 'h':
-				if (if_higher_loop_stack.size() == 0)
+			case 'g':
+				if (if_greater_loop_stack.size() == 0)
                 {
-					cout << "ERROR: Unmatched h at position " << i << "." << endl;
+					cout << "ERROR: Unmatched g at position " << i << "." << endl;
                     error_count++;
                 }
                 else
                 {
-                    int openPos = if_higher_loop_stack.top();
-					if_higher_loop_stack.pop();
+                    int openPos = if_greater_loop_stack.top();
+					if_greater_loop_stack.pop();
 					
-					if_higher_jump_table.insert(pair<int, int> (openPos, i + 1));
+					if_greater_jump_table.insert(pair<int, int> (openPos, i + 1));
                 }
                 break;
 			case 'L':
-                if_lower_loop_stack.push(i);
+                if_less_loop_stack.push(i);
                 break;
 			case 'l':
-				if (if_lower_loop_stack.size() == 0)
+				if (if_less_loop_stack.size() == 0)
                 {
 					cout << "ERROR: Unmatched l at position " << i << "." << endl;
                     error_count++;
                 }
                 else
                 {
-                    int openPos = if_lower_loop_stack.top();
-					if_lower_loop_stack.pop();
+                    int openPos = if_less_loop_stack.top();
+					if_less_loop_stack.pop();
 					
-					if_lower_jump_table.insert(pair<int, int> (openPos, i + 1));
+					if_less_jump_table.insert(pair<int, int> (openPos, i + 1));
                 }
                 break;
             default:
@@ -199,15 +199,15 @@ int main(int argc, char *argv[])
 		error_count++;
     }
 
-	if (if_higher_loop_stack.size() > 0)
+	if (if_greater_loop_stack.size() > 0)
     {
-		cout << "ERROR: Unmatched H at position " << if_higher_loop_stack.top() << "." << endl;
+		cout << "ERROR: Unmatched G at position " << if_greater_loop_stack.top() << "." << endl;
         error_count++;
     }
 
-	if (if_lower_loop_stack.size() > 0)
+	if (if_less_loop_stack.size() > 0)
     {
-		cout << "ERROR: Unmatched L at position " << if_lower_loop_stack.top() << "." << endl;
+		cout << "ERROR: Unmatched L at position " << if_less_loop_stack.top() << "." << endl;
         error_count++;
     }
 
@@ -389,19 +389,19 @@ int main(int argc, char *argv[])
 				else
 					source_data_ptr = if_not_equal_jump_table[source_data_ptr];
 				break;
-			case 'H':
+			case 'G':
 				right_side = main_array_ptr != ARRAY_LENGTH - 1 ? main_array_ptr + 1 : 0;
 				if (main_array[main_array_ptr] > main_array[right_side])
 					source_data_ptr++;
 				else
-					source_data_ptr = if_higher_jump_table[source_data_ptr];
+					source_data_ptr = if_greater_jump_table[source_data_ptr];
 				break;
 			case 'L':
 				right_side = main_array_ptr != ARRAY_LENGTH - 1 ? main_array_ptr + 1 : 0;
 				if (main_array[main_array_ptr] < main_array[right_side])
 					source_data_ptr++;
 				else
-					source_data_ptr = if_lower_jump_table[source_data_ptr];
+					source_data_ptr = if_less_jump_table[source_data_ptr];
 				break;
 			default:
 				source_data_ptr++;
