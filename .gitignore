@@ -12,7 +12,4 @@
 *.la
 *.a
 
-/Interpreter - Source code/Debug
-/Interpreter - Source code/Peridot/Debug
-/Interpreter - Source code/Peridot/ReadMe.txt
-/Interpreter - Source code/ipch
+/Live Interpreter/Source code/Peridot/ReadMe.txt
