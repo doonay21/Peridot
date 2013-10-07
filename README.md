@@ -1,14 +1,14 @@
 Peridot
 =======
 
-The Peridot programing language is an esoteric programming language based on [Brainfuck](http://en.wikipedia.org/wiki/Brainfuck) and fully compatible with it.
-It was designed to extend the functionality of Brainfuck.
+The **Peridot** programing language is an esoteric programming language based on [Brainfuck](http://en.wikipedia.org/wiki/Brainfuck) and fully compatible with it.
+It was designed to extend the functionality of **Brainfuck**.
 
-Uploaded Live Interpreter (0.1a version) is covering 100% of Peridot (0.1a version) commands. The interpreter is written for Windows and Linux systems.
+Uploaded **Live Interpreter** (0.1a version) is covering 100% of **Peridot's** (0.1a version) commands. The interpreter is written for **Windows** and **Linux** systems.
 
-Peridot language and Peridot Live Interpreter are in alpha stage so far. I am planing to expand Peridot's functionalities, and create its own compilator.
+**Peridot** language and **Peridot Live Interpreter** are in alpha stage so far. I am planing to expand **Peridot's** functionalities, and create its own compilator.
 
-Changelog:
+**Changelog:**
 * 0.1a Alpha version, initial release.
   * Full coverage of BrainFuck's 8 instructions (full compatibility)
   * Additional 13 instructions
@@ -24,12 +24,15 @@ Peridot Live Interpreter - Usage
 
 When no arguments are provided **Peridot.exe** will look for *spoint.p* file to execute.
 
-Peridot Live Interpreter - Linux install process
-------------------------------------------------
+Peridot Live Interpreter - Linux install instructions
+-----------------------------------------------------
 
-**cd /usr/crc**
-**wget **
-****
-****
-****
-****
+**cd /usr/src**
+
+**wget https://github.com/doonay21/Peridot/raw/master/Linux%20-%20Live%20Interpreter/peridot.tar.gz**
+
+**tar zxvf peridot.tar.gz**
+
+**cd peridot**
+
+**make && make install**
