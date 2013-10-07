@@ -13,3 +13,8 @@
 *.a
 
 /Windows - Live Interpreter/Source code/Peridot/ReadMe.txt
+/Windows - Live Interpreter/Source code/Debug
+/Windows - Live Interpreter/Source code/ipch
+/Windows - Live Interpreter/Source code/Release
+/Windows - Live Interpreter/Source code/Peridot/Debug
+/Windows - Live Interpreter/Source code/Peridot/Release
