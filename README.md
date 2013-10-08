@@ -11,7 +11,7 @@ Uploaded **Live Interpreter** (0.1a version) is covering 100% of **Peridot's** (
 **Changelog:**
 * 0.1a Alpha version, initial release.
   * Full coverage of BrainFuck's 8 instructions (full compatibility)
-  * Additional 13 instructions
+  * 25 new instructions
   * Two loops. Basic BrainFuck's "[...]" if-not-zero-loop and additional "{...}" if-zero-loop
   * Four conditional statements (if equal; if not equal; if greater; if less)
 
