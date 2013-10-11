@@ -40,3 +40,5 @@ Peridot Live Interpreter - Linux install instructions
 **cd peridot**
 
 **make && make install**
+
+![Instruction table](https://github.com/doonay21/Peridot/raw/master/instruction_table.png)
