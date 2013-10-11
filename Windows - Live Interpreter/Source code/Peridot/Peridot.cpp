@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <string>
+#include <string.h>
 #include <iostream>
 #include <fstream>
 #include <stack>
@@ -24,10 +25,10 @@ int main(int argc, char *argv[])
 	{
 		if(strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
 		{
-			cout << "Peridot Live Interpreter usage:" << endl << endl;
-			cout << "-h, --help\t\t\t\t- This help message. Lists all available usage options." << endl;
-			cout << "-d [filename], --debug [filename]\t- Debug mode." << endl;
-			cout << "[filename]\t\t\t\t- Normal mode." << endl;
+			cout << "Peridot Live Interpreter usage:" << endl;
+			cout << "  -h, --help\t\t\t\t- This help message. Lists all available usage options." << endl;
+			cout << "  -d [filename], --debug [filename]\t- Debug mode." << endl;
+			cout << "  [filename]\t\t\t\t- Normal mode." << endl;
 			return 0;
 		}
 		else if (strcmp(argv[1], "-d") == 0 || strcmp(argv[1], "--debug") == 0)
