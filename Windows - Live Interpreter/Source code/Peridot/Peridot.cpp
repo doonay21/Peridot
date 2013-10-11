@@ -13,15 +13,40 @@ string source_data;
 int ARRAY_LENGTH = 65536;
 
 unsigned char* main_array;
-int main_array_ptr = 0;	
+unsigned short main_array_ptr = 0;
+bool debug_on = false;
 
 int main(int argc, char *argv[])
 {
 	string filename = "spoint.p";
 
 	if(argc > 1)
-		filename = argv[1];
-	
+	{
+		if(strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "--help") == 0)
+		{
+			cout << "Peridot Live Interpreter usage:" << endl << endl;
+			cout << "-h, --help\t\t\t\t- This help message. Lists all available usage options." << endl;
+			cout << "-d [filename], --debug [filename]\t- Debug mode." << endl;
+			cout << "[filename]\t\t\t\t- Normal mode." << endl;
+			return 0;
+		}
+		else if (strcmp(argv[1], "-d") == 0 || strcmp(argv[1], "--debug") == 0)
+		{
+			if (argc > 2)
+			{
+				debug_on = true;
+				filename = argv[2];
+			}
+			else
+			{
+				cout << "ERROR: -d, --debug needs additional argument [filename]." << endl;
+				return 0;
+			}
+		}
+		else
+			filename = argv[1];
+	}
+
 	main_array = new unsigned char[ARRAY_LENGTH];
 	
 	unsigned int source_data_ptr = 0;
@@ -72,16 +97,16 @@ int main(int argc, char *argv[])
             case ']':
 				if (equal_loop_stack.size() == 0)
                 {
-					cout << "ERROR: Unmatched ] at position " << i << "." << endl;
+					cout << "ERROR: Unmatched ] at position " << i + 1 << "." << endl;
                     error_count++;
                 }
                 else
                 {
-                    int openPos = equal_loop_stack.top();
+                    int pos_buf = equal_loop_stack.top();
 					equal_loop_stack.pop();
 					
-					equal_jump_table.insert(pair<int, int> (openPos, i + 1));
-					equal_jump_table.insert(pair<int, int> (i, openPos + 1));
+					equal_jump_table.insert(pair<int, int> (pos_buf, i + 1));
+					equal_jump_table.insert(pair<int, int> (i, pos_buf + 1));
                 }
                 break;
 			case '{':
@@ -90,16 +115,16 @@ int main(int argc, char *argv[])
 			case '}':
 				if (n_equal_loop_stack.size() == 0)
                 {
-					cout << "ERROR: Unmatched } at position " << i << "." << endl;
+					cout << "ERROR: Unmatched } at position " << i + 1 << "." << endl;
                     error_count++;
                 }
                 else
                 {
-                    int openPos = n_equal_loop_stack.top();
+                    int pos_buf = n_equal_loop_stack.top();
 					n_equal_loop_stack.pop();
 					
-					n_equal_jump_table.insert(pair<int, int> (openPos, i + 1));
-					n_equal_jump_table.insert(pair<int, int> (i, openPos + 1));
+					n_equal_jump_table.insert(pair<int, int> (pos_buf, i + 1));
+					n_equal_jump_table.insert(pair<int, int> (i, pos_buf + 1));
                 }
                 break;
 			case 'E':
@@ -108,32 +133,32 @@ int main(int argc, char *argv[])
 			case 'e':
 				if (if_equal_loop_stack.size() == 0)
                 {
-					cout << "ERROR: Unmatched e at position " << i << "." << endl;
+					cout << "ERROR: Unmatched e at position " << i + 1 << "." << endl;
                     error_count++;
                 }
                 else
                 {
-                    int openPos = if_equal_loop_stack.top();
+                    int pos_buf = if_equal_loop_stack.top();
 					if_equal_loop_stack.pop();
 					
-					if_equal_jump_table.insert(pair<int, int> (openPos, i + 1));
+					if_equal_jump_table.insert(pair<int, int> (pos_buf, i + 1));
                 }
                 break;
-			case 'N':
+			case 'D':
                 if_not_equal_loop_stack.push(i);
                 break;
-			case 'n':
+			case 'd':
 				if (if_not_equal_loop_stack.size() == 0)
                 {
-					cout << "ERROR: Unmatched n at position " << i << "." << endl;
+					cout << "ERROR: Unmatched d at position " << i + 1 << "." << endl;
                     error_count++;
                 }
                 else
                 {
-                    int openPos = if_not_equal_loop_stack.top();
+                    int pos_buf = if_not_equal_loop_stack.top();
 					if_not_equal_loop_stack.pop();
 					
-					if_not_equal_jump_table.insert(pair<int, int> (openPos, i + 1));
+					if_not_equal_jump_table.insert(pair<int, int> (pos_buf, i + 1));
                 }
                 break;
 			case 'G':
@@ -142,15 +167,15 @@ int main(int argc, char *argv[])
 			case 'g':
 				if (if_greater_loop_stack.size() == 0)
                 {
-					cout << "ERROR: Unmatched g at position " << i << "." << endl;
+					cout << "ERROR: Unmatched g at position " << i + 1 << "." << endl;
                     error_count++;
                 }
                 else
                 {
-                    int openPos = if_greater_loop_stack.top();
+                    int pos_buf = if_greater_loop_stack.top();
 					if_greater_loop_stack.pop();
 					
-					if_greater_jump_table.insert(pair<int, int> (openPos, i + 1));
+					if_greater_jump_table.insert(pair<int, int> (pos_buf, i + 1));
                 }
                 break;
 			case 'L':
@@ -159,15 +184,15 @@ int main(int argc, char *argv[])
 			case 'l':
 				if (if_less_loop_stack.size() == 0)
                 {
-					cout << "ERROR: Unmatched l at position " << i << "." << endl;
+					cout << "ERROR: Unmatched l at position " << i + 1 << "." << endl;
                     error_count++;
                 }
                 else
                 {
-                    int openPos = if_less_loop_stack.top();
+                    int pos_buf = if_less_loop_stack.top();
 					if_less_loop_stack.pop();
 					
-					if_less_jump_table.insert(pair<int, int> (openPos, i + 1));
+					if_less_jump_table.insert(pair<int, int> (pos_buf, i + 1));
                 }
                 break;
             default:
@@ -177,45 +202,44 @@ int main(int argc, char *argv[])
 
 	if (equal_loop_stack.size() > 0)
     {
-		cout << "ERROR: Unmatched [ at position " << equal_loop_stack.top() << "." << endl;
+		cout << "ERROR: Unmatched [ at position " << equal_loop_stack.top() + 1 << "." << endl;
         error_count++;
     }
 
 	if (n_equal_loop_stack.size() > 0)
     {
-		cout << "ERROR: Unmatched { at position " << n_equal_loop_stack.top() << "." << endl;
+		cout << "ERROR: Unmatched { at position " << n_equal_loop_stack.top() + 1 << "." << endl;
         error_count++;
     }
 
 	if (if_equal_loop_stack.size() > 0)
     {
-		cout << "ERROR: Unmatched E at position " << if_equal_loop_stack.top() << "." << endl;
+		cout << "ERROR: Unmatched E at position " << if_equal_loop_stack.top() + 1 << "." << endl;
         error_count++;
     }
 
 	if (if_not_equal_loop_stack.size() > 0)
     {
-		cout << "ERROR: Unmatched N at position " << if_not_equal_loop_stack.top() << "." << endl;
+		cout << "ERROR: Unmatched D at position " << if_not_equal_loop_stack.top() + 1 << "." << endl;
 		error_count++;
     }
 
 	if (if_greater_loop_stack.size() > 0)
     {
-		cout << "ERROR: Unmatched G at position " << if_greater_loop_stack.top() << "." << endl;
+		cout << "ERROR: Unmatched G at position " << if_greater_loop_stack.top() + 1 << "." << endl;
         error_count++;
     }
 
 	if (if_less_loop_stack.size() > 0)
     {
-		cout << "ERROR: Unmatched L at position " << if_less_loop_stack.top() << "." << endl;
+		cout << "ERROR: Unmatched L at position " << if_less_loop_stack.top() + 1 << "." << endl;
         error_count++;
     }
 
 	if(error_count != 0)
 		return 0;
 
-	int right_side = 0;
-	int left_side = 0;
+	unsigned short helper_var = 0;
 
 	while (source_data_ptr < source_data.length())
     {
@@ -223,14 +247,10 @@ int main(int argc, char *argv[])
 		{
 			case '>':
 				main_array_ptr++;
-				if (main_array_ptr == ARRAY_LENGTH)
-					main_array_ptr = 0;
 				source_data_ptr++;
 				break;
 			case '<':
 				main_array_ptr--;
-				if (main_array_ptr == -1)
-					main_array_ptr = ARRAY_LENGTH - 1;
 				source_data_ptr++;
 				break;
 			case '+':
@@ -294,11 +314,13 @@ int main(int argc, char *argv[])
 				source_data_ptr++;
 				break;
 			case '@':
-				main_array_ptr -= main_array[main_array_ptr];
+				helper_var = main_array_ptr - 1;
+				main_array[helper_var] = main_array[main_array_ptr];
 				source_data_ptr++;
 				break;
 			case '#':
-				main_array_ptr += main_array[main_array_ptr];
+				helper_var = main_array_ptr + 1;
+				main_array[helper_var] = main_array[main_array_ptr];
 				source_data_ptr++;
 				break;
 			case 'P':
@@ -310,7 +332,7 @@ int main(int argc, char *argv[])
 					pos_stack.pop();
 				else
 				{
-					cout << endl << "ERROR: Unable to pop from pointer stack - stack is empty. Command 'p' at position " << source_data_ptr << "." << endl;
+					cout << endl << "ERROR: Unable to pop from pointer stack - stack is empty. Command 'p' at position " << source_data_ptr + 1 << "." << endl;
 					return 0;
 				}
 				source_data_ptr++;
@@ -320,7 +342,7 @@ int main(int argc, char *argv[])
 					main_array_ptr = pos_stack.top();
 				else
 				{
-					cout << endl << "ERROR: Unable to jump to position from pointer stack - stack is empty. Command 'j' at position " << source_data_ptr << "." << endl;
+					cout << endl << "ERROR: Unable to jump to position from pointer stack - stack is empty. Command 'j' at position " << source_data_ptr + 1 << "." << endl;
 					return 0;
 				}
 				source_data_ptr++;
@@ -333,7 +355,7 @@ int main(int argc, char *argv[])
 				}
 				else
 				{
-					cout << endl << "ERROR: Unable to jump (and pop) to position from pointer stack - stack is empty. Command 'J' at position " << source_data_ptr << "." << endl;
+					cout << endl << "ERROR: Unable to jump (and pop) to position from pointer stack - stack is empty. Command 'J' at position " << source_data_ptr + 1 << "." << endl;
 					return 0;
 				}
 				source_data_ptr++;
@@ -347,7 +369,7 @@ int main(int argc, char *argv[])
 					val_stack.pop();
 				else
 				{
-					cout << endl << "ERROR: Unable to pop from value stack - stack is empty. Command 'v' at position " << source_data_ptr << "." << endl;
+					cout << endl << "ERROR: Unable to pop from value stack - stack is empty. Command 'v' at position " << source_data_ptr + 1 << "." << endl;
 					return 0;
 				}
 				source_data_ptr++;
@@ -357,7 +379,7 @@ int main(int argc, char *argv[])
 					main_array[main_array_ptr] = val_stack.top();
 				else
 				{
-					cout << endl << "ERROR: Unable to put value from stack - stack is empty. Command 'i' at position " << source_data_ptr << "." << endl;
+					cout << endl << "ERROR: Unable to put value from stack - stack is empty. Command 'i' at position " << source_data_ptr + 1 << "." << endl;
 					return 0;
 				}
 				source_data_ptr++;
@@ -370,41 +392,87 @@ int main(int argc, char *argv[])
 				}
 				else
 				{
-					cout << endl << "ERROR: Unable to put (and pop) value from stack - stack is empty. Command 'I' at position " << source_data_ptr << "." << endl;
+					cout << endl << "ERROR: Unable to put (and pop) value from stack - stack is empty. Command 'I' at position " << source_data_ptr + 1 << "." << endl;
 					return 0;
 				}
 				source_data_ptr++;
 				break;
 			case 'E':
-				right_side = main_array_ptr != ARRAY_LENGTH - 1 ? main_array_ptr + 1 : 0;
-				if (main_array[main_array_ptr] == main_array[right_side])
-					source_data_ptr++;
+				if(!val_stack.empty())
+				{
+					if (main_array[main_array_ptr] == val_stack.top())
+						source_data_ptr++;
+					else
+						source_data_ptr = if_equal_jump_table[source_data_ptr];
+				}
 				else
-					source_data_ptr = if_equal_jump_table[source_data_ptr];
+				{
+					cout << endl << "ERROR: Unable to compare top stack value - stack is empty. Command 'E' at position " << source_data_ptr + 1 << "." << endl;
+					return 0;
+				}
 				break;
-			case 'N':
-				right_side = main_array_ptr != ARRAY_LENGTH - 1 ? main_array_ptr + 1 : 0;
-				if (main_array[main_array_ptr] != main_array[right_side])
-					source_data_ptr++;
+			case 'e':
+				source_data_ptr++;
+				break;
+			case 'D':
+				if(!val_stack.empty())
+				{
+					if (main_array[main_array_ptr] != val_stack.top())
+						source_data_ptr++;
+					else
+						source_data_ptr = if_not_equal_jump_table[source_data_ptr];
+				}
 				else
-					source_data_ptr = if_not_equal_jump_table[source_data_ptr];
+				{
+					cout << endl << "ERROR: Unable to compare top stack value - stack is empty. Command 'D' at position " << source_data_ptr + 1 << "." << endl;
+					return 0;
+				}
+				break;
+			case 'd':
+				source_data_ptr++;
 				break;
 			case 'G':
-				right_side = main_array_ptr != ARRAY_LENGTH - 1 ? main_array_ptr + 1 : 0;
-				if (main_array[main_array_ptr] > main_array[right_side])
+				if(!val_stack.empty())
+				{
+				if (main_array[main_array_ptr] > val_stack.top())
 					source_data_ptr++;
 				else
 					source_data_ptr = if_greater_jump_table[source_data_ptr];
+				}
+				else
+				{
+					cout << endl << "ERROR: Unable to compare top stack value - stack is empty. Command 'G' at position " << source_data_ptr + 1 << "." << endl;
+					return 0;
+				}
+				break;
+			case 'g':
+				source_data_ptr++;
 				break;
 			case 'L':
-				right_side = main_array_ptr != ARRAY_LENGTH - 1 ? main_array_ptr + 1 : 0;
-				if (main_array[main_array_ptr] < main_array[right_side])
+				if(!val_stack.empty())
+				{
+				if (main_array[main_array_ptr] < val_stack.top())
 					source_data_ptr++;
 				else
 					source_data_ptr = if_less_jump_table[source_data_ptr];
+				}
+				else
+				{
+					cout << endl << "ERROR: Unable to compare top stack value - stack is empty. Command 'L' at position " << source_data_ptr + 1 << "." << endl;
+					return 0;
+				}
+				break;
+			case 'l':
+				source_data_ptr++;
+				break;
+			case 'o':
+				if (debug_on)
+					cout << (int)main_array[main_array_ptr];
+				source_data_ptr++;
 				break;
 			default:
-				source_data_ptr++;
+				cout << endl << "ERROR: Unknown instruction '" << source_data[source_data_ptr] << "' at position " << source_data_ptr + 1 << "." << endl;
+				return 0;
 				break;
 		}
     }
