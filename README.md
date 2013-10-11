@@ -5,7 +5,7 @@ It was designed to extend the functionality of **Brainfuck**.
 
 Uploaded **Live Interpreter** (0.11a version) is covering 100% of **Peridot's** (0.11 version) commands. The interpreter is written for **Windows** and **Linux** systems.
 
-**Peridot** language and **Peridot Live Interpreter** are in alpha stage so far. I am planing to expand **Peridot's** functionalities, and create its own compilator.
+**Peridot** language and **Peridot Live Interpreter** are in alpha stage so far. I am planing to expand **Peridot's** functionalities, and create its own compiler.
 
 **Changelog:**
 ```
