@@ -20,7 +20,7 @@ Uploaded **Live Interpreter** (0.11a version) is covering 100% of **Peridot's** 
   * Minor optimizations
 ```
 ## Peridot instructions
-Simple introduction and indtruction list can be found on <a href="https://github.com/doonay21/Peridot/wiki" target="_blank">Peridot Wiki</a> page.
+Simple introduction and instruction list can be found on <a href="https://github.com/doonay21/Peridot/wiki" target="_blank">Peridot Wiki</a> page.
 ## Peridot Live Interpreter - Usage
 
 **Peridot.exe**(Windows) and **peridot**(Linux) can be started using no arguments or filename as argument like so:
