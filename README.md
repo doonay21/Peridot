@@ -9,6 +9,7 @@ Uploaded **Live Interpreter** (0.11a version) is covering 100% of **Peridot's** 
 **Peridot** language and **Peridot Live Interpreter** are in alpha stage so far. I am planing to expand **Peridot's** functionalities, and create its own compilator.
 
 **Changelog:**
+```
 * 0.1a Alpha version, initial release.
   * Full coverage of BrainFuck's 8 instructions (full compatibility)
   * 20 new instructions
@@ -18,27 +19,25 @@ Uploaded **Live Interpreter** (0.11a version) is covering 100% of **Peridot's** 
   * Help message added (-h, --help)
   * Error message will rise on unknown instructions
   * Minor optimizations
-
+```
 Peridot Live Interpreter - Usage
 --------------------------------
 
-**Peridot.exe** and **peridot**(Linux) can be started using no arguments or filename as argument like so:
-
-> Peridot.exe hello_world.p
-
-When no arguments are provided **Peridot.exe** will look for *spoint.p* file to execute.
+**Peridot.exe**(Windows) and **peridot**(Linux) can be started using no arguments or filename as argument like so:
+```
+Peridot.exe hello_world.p
+```
+```
+peridot hello_world.p
+```
+When no arguments are provided **Peridot** will look for *spoint.p* file to execute.
 
 Peridot Live Interpreter - Linux install instructions
 -----------------------------------------------------
-
-**cd /usr/src**
-
-**wget https://github.com/doonay21/Peridot/raw/master/Linux%20-%20Live%20Interpreter/peridot.tar.gz**
-
-**tar zxvf peridot.tar.gz**
-
-**cd peridot**
-
-**make && make install**
-
-![Instruction table](https://github.com/doonay21/Peridot/raw/master/instruction_table.png)
+```
+cd /usr/src
+wget https://github.com/doonay21/Peridot/raw/master/Linux%20-%20Live%20Interpreter/peridot.tar.gz
+tar zxvf peridot.tar.gz
+cd peridot
+make && make install
+```
