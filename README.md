@@ -33,6 +33,12 @@ peridot hello_world.p
 When no arguments are provided **Peridot** will look for *spoint.p* file to execute.
 
 ## Peridot Live Interpreter - Linux install instructions
+Requirements for Peridot Live Interpreter:
+* g++
+* make
+
+Best is to have "build-essential" package installed on Linux machine.
+
 ```
 cd /usr/src
 wget https://github.com/doonay21/Peridot/raw/master/Linux%20-%20Live%20Interpreter/peridot.tar.gz
